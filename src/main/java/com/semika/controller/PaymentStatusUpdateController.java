@@ -1,8 +1,6 @@
 package com.semika.controller;
 
-import com.semika.config.MosaicWebSocketConfigProperties;
-import com.semika.responsemodel.Greeting;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.semika.responsemodel.Status;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.simp.stomp.StompSession;
@@ -33,7 +31,7 @@ public class PaymentStatusUpdateController {
                 new StompSessionHandlerAdapter() {
                 }).get(10, TimeUnit.SECONDS);
 
-        stompSession.send("/topic/greetings", new Greeting("Hello, I am from server !" + status));
+        stompSession.send("/topic/greetings", new Status(status));
     }
 
 }

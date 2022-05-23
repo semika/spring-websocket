@@ -1,13 +1,13 @@
 package com.semika.responsemodel;
 
-public class Greeting {
+public class Status {
 
     private String content;
 
-    public Greeting() {
+    public Status() {
     }
 
-    public Greeting(String content) {
+    public Status(String content) {
         this.content = content;
     }
 

@@ -16,9 +16,6 @@ import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 @EnableWebSocketMessageBroker
 public class MosaicWebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
-    @Autowired
-    private MosaicWebSocketConfigProperties mosaicWebSocketConfigProperties;
-
     @Value("${mosaic.websocket.url.dest}")
     private String appDestUrl;
 
