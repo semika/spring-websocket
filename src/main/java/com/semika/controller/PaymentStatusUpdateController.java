@@ -31,7 +31,7 @@ public class PaymentStatusUpdateController {
                 new StompSessionHandlerAdapter() {
                 }).get(10, TimeUnit.SECONDS);
 
-        stompSession.send("/topic/greetings", new Status(status));
+        stompSession.send("/topic/payment-status", new Status(status));
     }
 
 }

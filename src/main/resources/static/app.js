@@ -19,7 +19,7 @@ function connect() {
         setConnected(true);
         console.log('Connected: ' + frame);
         $("#connection-status").html("Connected!")
-        stompClient.subscribe('/topic/greetings', function (greeting) {
+        stompClient.subscribe('/topic/payment-status', function (greeting) {
             updateStatus(JSON.parse(greeting.body).content);
         });
     });
