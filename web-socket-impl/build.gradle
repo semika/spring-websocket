@@ -1,0 +1,6 @@
+dependencies {
+    //Adding project dependency
+    implementation project(":web-socket-api")
+    implementation project(":web-socket-util")
+    implementation project(":web-socket-common")
+}

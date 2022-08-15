@@ -1,1 +1,6 @@
 rootProject.name = 'web-socket'
+include 'web-socket-api'
+include 'web-socket-common'
+include 'web-socket-impl'
+include 'web-socket-util'
+

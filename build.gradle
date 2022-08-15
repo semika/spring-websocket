@@ -1,17 +1,58 @@
 plugins {
+	// This configurations will be applied only to
+    // parent project
 	id 'org.springframework.boot' version '2.7.0'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 }
 
-group = 'com.semika'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
-
-repositories {
-	mavenCentral()
+//This will be applied only to 'web-socket-api' project
+project ("web-socket-api") {
+	apply plugin: 'java'
+	task("hello").doLast{
+		println "I am from $project.name"
+	}
 }
 
+//The bellow configurations will be applied
+//to all sub projects.
+subprojects {
+	apply plugin: 'java'
+	task("hello1").doLast{
+		println "I am from $project.name"
+	}
+}
+
+//configurations which applied for all projects
+allprojects {
+	apply plugin: 'java'
+	group = 'com.semika'
+	version = '0.0.1-SNAPSHOT'
+	//sourceCompatibility = '11'
+	java.sourceCompatibility(JavaVersion.VERSION_11)
+
+	// common repositories for all projects goes here
+	repositories {
+		mavenLocal()
+		mavenCentral()
+	}
+
+	dependencies {
+		//common dependencies for all projects.
+		compileOnly "org.projectlombok:lombok:1.18.22"
+		annotationProcessor "org.projectlombok:lombok:1.18.22"
+		implementation 'com.google.guava:guava:31.0.1-jre'
+
+		testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+		testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+	}
+
+	tasks.named('test') {
+		useJUnitPlatform()
+	}
+}
+
+//The followings are the dependencies of root project only.
 dependencies {
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
@@ -22,10 +63,6 @@ dependencies {
 	implementation 'org.webjars:bootstrap:3.3.7'
 	implementation 'org.webjars:jquery:3.1.1-1'
 
-	compileOnly "org.projectlombok:lombok:1.18.22"
-	annotationProcessor "org.projectlombok:lombok:1.18.22"
-}
-
-tasks.named('test') {
-	useJUnitPlatform()
+	implementation project(":web-socket-api")
+	implementation project(":web-socket-impl")
 }
