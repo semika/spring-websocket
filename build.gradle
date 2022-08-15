@@ -18,9 +18,13 @@ project ("web-socket-api") {
 //to all sub projects.
 subprojects {
 	apply plugin: 'java'
-	task("hello1").doLast{
+
+	// 'hello1' task will be applied to all sub projects
+	task("hello1").doLast {
 		println "I am from $project.name"
 	}
+
+	jar.enabled=true
 }
 
 //configurations which applied for all projects
@@ -28,7 +32,6 @@ allprojects {
 	apply plugin: 'java'
 	group = 'com.semika'
 	version = '0.0.1-SNAPSHOT'
-	//sourceCompatibility = '11'
 	java.sourceCompatibility(JavaVersion.VERSION_11)
 
 	// common repositories for all projects goes here
@@ -38,7 +41,7 @@ allprojects {
 	}
 
 	dependencies {
-		//common dependencies for all projects.
+		//common dependencies for all projects should go here.
 		compileOnly "org.projectlombok:lombok:1.18.22"
 		annotationProcessor "org.projectlombok:lombok:1.18.22"
 		implementation 'com.google.guava:guava:31.0.1-jre'
